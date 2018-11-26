@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -22,6 +23,7 @@ import javafx.scene.control.TextField;
 public class AccountController implements Initializable {
     readWrite rw = new readWrite();
     static Customer currentUser;
+    static Account account;
     @FXML
     private TextField amountTxt;
     @FXML
@@ -36,6 +38,8 @@ public class AccountController implements Initializable {
     private Button logoutBtn;
     @FXML
     private Label balanceLbl;
+    @FXML
+    private Label feeLbl;
 
     /**
      * Initializes the controller class.
@@ -43,37 +47,49 @@ public class AccountController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        updateBalanceDisplay();
     }    
 
     public void initCust(String username, String password){
         System.out.println("pkg528finalgui.AccountController.initCust()");
         currentUser = rw.loadCustomer(username, password);
-        System.out.println(currentUser.toString());
-       // updateBalanceDisplay();
+        account = new Account(rw.getBalance());
+        currentUser.loadAccount(account);
+      //  updateBalanceDisplay();
+        //System.out.println(currentUser.toString());
         
     }
     @FXML
     private void handleWithdraw(ActionEvent event) {
         currentUser.withdraw((Double.valueOf(amountTxt.getText())));
+        rw.writeBalance(account.getBalance());
         updateBalanceDisplay();
+        
     }
 
     @FXML
     private void handleDeposit(ActionEvent event) {
         currentUser.deposit((Double.valueOf(amountTxt.getText())));
+        rw.writeBalance(account.getBalance());
         updateBalanceDisplay();
     }
 
     @FXML
     private void handleOrder(ActionEvent event) {
+        currentUser.withdraw(Double.valueOf(orderTxt.getText()) + account.calcFee());
+        rw.writeBalance(account.getBalance());
+        feeLbl.setText(Double.toString(account.calcFee()));
+        updateBalanceDisplay();
     }
 
     @FXML
     private void handleLogout(ActionEvent event) {
+        Stage stage = (Stage) logoutBtn.getScene().getWindow();
+        stage.close();
     }
 
     private void updateBalanceDisplay() {
-        balanceLbl.setText(Double.toString(rw.getBalance()));
+        balanceLbl.setText(" $" + Double.toString(rw.getBalance()));
     }
     
 }

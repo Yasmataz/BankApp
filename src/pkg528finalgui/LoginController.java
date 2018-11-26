@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  *
  * @author Yasamin
  */
-public class BankGUIController implements Initializable {
+public class LoginController implements Initializable {
 
     @FXML
     private Button loginBtn;
@@ -35,8 +35,7 @@ public class BankGUIController implements Initializable {
     private TextField passwordTxt;
 
    User currentUser;
-    @FXML
-    private CheckBox checkbox;
+   readWrite rw = new readWrite();
     public void loadProfile(String username, String password){
 		try {
 			currentUser = new Customer(username, password, 0);
@@ -57,22 +56,38 @@ public class BankGUIController implements Initializable {
 
     @FXML
     private void handleLoginBtn(ActionEvent event) throws IOException {
-        AccountController ac = new AccountController();
-        ac.initCust(usernameTxt.getText(), passwordTxt.getText());
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("account.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setOpacity(1);
-        stage.setTitle("Account");
-        stage.setScene(new Scene(root, 600, 400));
-        stage.showAndWait();
+        String username = usernameTxt.getText();
+        String password = passwordTxt.getText();
         
+        if(username.equals("admin") && authenticate(username, password)){
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("managerGUI.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setOpacity(1);
+            stage.setTitle("Manager");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.showAndWait();
+        }
+        else{
+            AccountController ac = new AccountController();
+            ac.initCust(username, password);
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("account.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setOpacity(1);
+            stage.setTitle("Account");
+            stage.setScene(new Scene(root, 600, 400));
+            stage.showAndWait();
+        }
     }
 
-    @FXML
-    private void handleCheck(ActionEvent event) {
+    private boolean authenticate(String username, String password) {
+        if(rw.getPass(username).equals(password))
+            return true;
+        return false;
     }
 
-    
 }

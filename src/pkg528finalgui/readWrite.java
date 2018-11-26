@@ -18,7 +18,7 @@ public class readWrite {
 		
 	    BufferedWriter writer;
 		try {
-			writer = new BufferedWriter(new FileWriter(username+".txt "));
+			writer = new BufferedWriter(new FileWriter(username+".txt"));
 			writer.write(password);
 			writer.newLine();
 			writer.write("0");
@@ -45,9 +45,9 @@ public class readWrite {
 		return null;
 	}
 
-	private String getPass(String username) {
+	public String getPass(String username) {
             try {
-                BufferedReader read = new BufferedReader(new FileReader(currentFile+".txt"));
+                BufferedReader read = new BufferedReader(new FileReader(username+".txt"));
                // read.close();
                 return read.readLine();
                 

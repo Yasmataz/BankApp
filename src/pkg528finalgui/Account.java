@@ -2,11 +2,9 @@ package pkg528finalgui;
 public class Account {
 	
 	State myState;
-	readWrite rw;
 	private double balance;
 	
 	public Account(double balance){
-		rw = new readWrite();
 		this.balance = balance;
 		checkState();
 	}
@@ -32,13 +30,11 @@ public class Account {
 	}
 	public void deposit(double amount){
 		balance += amount;
-		rw.writeBalance(balance);
 		checkState();
 	}
 	
 	public void withdraw(double amount){
 		balance -= amount;
-		rw.writeBalance(balance);
 		checkState();
 	}
 	
@@ -47,9 +43,9 @@ public class Account {
 	}
 	
 	private void checkState() {
-		if(balance > 2000)
+		if(balance < 1000)
 			myState = new Silver();
-		else if(balance > 4000)
+		else if(balance >= 1000 && balance < 2000)
 			myState = new Gold();
 		else
 			myState = new Platinum();

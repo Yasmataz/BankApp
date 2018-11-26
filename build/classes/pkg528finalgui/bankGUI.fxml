@@ -17,7 +17,6 @@
   </rowConstraints>
    <children>
       <TextField fx:id="usernameTxt" GridPane.columnIndex="1" />
-      <TextField fx:id="passwordTxt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Label text="Enter Username:">
          <font>
             <Font size="22.0" />
@@ -29,6 +28,6 @@
          </font>
       </Label>
       <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#handleLoginBtn" prefHeight="74.0" prefWidth="322.0" text="LOGIN" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <CheckBox fx:id="checkbox" mnemonicParsing="false" onAction="#handleCheck" text="CheckBox" GridPane.rowIndex="2" />
+      <PasswordField fx:id="passwordTxt" onAction="#handleLoginBtn" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
 </GridPane>
