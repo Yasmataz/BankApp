@@ -6,7 +6,7 @@ public class Customer extends User{
 	
 	private Account account;
 	
-        public Customer(String username, String password, double balance) throws IOException{
+        public Customer(String username, String password) throws IOException{
 		super.setPass(password);
                 setRole();
                 super.setUsername(username);

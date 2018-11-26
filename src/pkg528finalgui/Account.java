@@ -1,7 +1,7 @@
 package pkg528finalgui;
 public class Account {
 	
-	State myState;
+	private State myState;
 	private double balance;
 	
 	public Account(double balance){

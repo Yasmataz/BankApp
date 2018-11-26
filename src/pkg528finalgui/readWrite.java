@@ -21,7 +21,7 @@ public class readWrite {
 			writer = new BufferedWriter(new FileWriter(username+".txt"));
 			writer.write(password);
 			writer.newLine();
-			writer.write("0");
+			writer.write("100");
 		    writer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -35,7 +35,7 @@ public class readWrite {
 		//if(password.equals(getPass(username))){
 			try {
 				currentFile = username; 
-				return new Customer(username, password, getBalance());
+				return new Customer(username, password);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				System.out.println("ohs to the noes");

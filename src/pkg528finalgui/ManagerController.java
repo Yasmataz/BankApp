@@ -20,7 +20,7 @@ import javafx.stage.Stage;
  *
  * @author Yasamin
  */
-public class ManagerGUIController implements Initializable {
+public class ManagerController implements Initializable {
 
     @FXML
     private Button deleteBtn;

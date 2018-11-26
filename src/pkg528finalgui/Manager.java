@@ -24,7 +24,7 @@ public class Manager extends User{
 		
     }
 	
-	public void deleteCustomer(String username){
+    public void deleteCustomer(String username){
     	rw.deleteCustomer(username);
     }
 }

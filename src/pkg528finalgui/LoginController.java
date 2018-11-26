@@ -34,11 +34,11 @@ public class LoginController implements Initializable {
     @FXML
     private TextField passwordTxt;
 
-   User currentUser;
-   readWrite rw = new readWrite();
+    private User currentUser;
+    private readWrite rw = new readWrite();
     public void loadProfile(String username, String password){
 		try {
-			currentUser = new Customer(username, password, 0);
+			currentUser = new Customer(username, password);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,7 +70,7 @@ public class LoginController implements Initializable {
             stage.showAndWait();
         }
         else{
-            AccountController ac = new AccountController();
+            CustomerController ac = new CustomerController();
             ac.initCust(username, password);
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("account.fxml"));

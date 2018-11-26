@@ -3,12 +3,18 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
-    public abstract class User {
-        //Overview:This abstract class is responsible for storing the username,
-        // password, and role of the useres (manager or customer)
+/**
+ *
+ * @author Yasamin
+ */
+public abstract class User {
+        //Overview: This abstract class is responsible for storing the username,
+        //password, and role of the useres (manager or customer)
         
-        
+        //Abstraction Function: username and password are logon credentials, and role is
+        // either "customer" or "manager"
+        //
+        //Rep Invariant: values of username, password, and role cannot be null or empty
 	private String username;
 	private String password;
 	protected String role;
@@ -34,7 +40,6 @@ import java.io.IOException;
         public String getUsername() {
             return username;
         }
-
         //Effects: sets the username feild to the provided username
         //Modifies: username feild
         //Requires: a string (username) as input

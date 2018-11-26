@@ -20,10 +20,10 @@ import javafx.stage.Stage;
  *
  * @author Yasamin
  */
-public class AccountController implements Initializable {
-    readWrite rw = new readWrite();
-    static Customer currentUser;
-    static Account account;
+public class CustomerController implements Initializable {
+    private readWrite rw = new readWrite();
+    private static Customer currentUser;
+    private static Account account;
     @FXML
     private TextField amountTxt;
     @FXML
@@ -51,7 +51,6 @@ public class AccountController implements Initializable {
     }    
 
     public void initCust(String username, String password){
-        System.out.println("pkg528finalgui.AccountController.initCust()");
         currentUser = rw.loadCustomer(username, password);
         account = new Account(rw.getBalance());
         currentUser.loadAccount(account);
@@ -76,10 +75,16 @@ public class AccountController implements Initializable {
 
     @FXML
     private void handleOrder(ActionEvent event) {
-        currentUser.withdraw(Double.valueOf(orderTxt.getText()) + account.calcFee());
-        rw.writeBalance(account.getBalance());
-        feeLbl.setText(Double.toString(account.calcFee()));
-        updateBalanceDisplay();
+        if(Double.valueOf(orderTxt.getText())<=50){
+            feeLbl.setText("Order must be at least $50");
+            updateBalanceDisplay();
+        }
+        else{
+            currentUser.withdraw(Double.valueOf(orderTxt.getText()) + account.calcFee());
+            rw.writeBalance(account.getBalance());
+            feeLbl.setText(Double.toString(account.calcFee()));
+            updateBalanceDisplay();
+        }
     }
 
     @FXML
