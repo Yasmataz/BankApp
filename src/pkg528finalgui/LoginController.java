@@ -60,7 +60,7 @@ public class LoginController implements Initializable {
         String password = passwordTxt.getText();
         
         if(username.equals("admin") && authenticate(username, password)){
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("managerGUI.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("manager.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -73,7 +73,7 @@ public class LoginController implements Initializable {
             CustomerController ac = new CustomerController();
             ac.initCust(username, password);
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("account.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("customer.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);

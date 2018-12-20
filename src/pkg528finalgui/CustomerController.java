@@ -63,6 +63,7 @@ public class CustomerController implements Initializable {
         currentUser.withdraw((Double.valueOf(amountTxt.getText())));
         rw.writeBalance(account.getBalance());
         updateBalanceDisplay();
+        amountTxt.clear();
         
     }
 
@@ -71,6 +72,7 @@ public class CustomerController implements Initializable {
         currentUser.deposit((Double.valueOf(amountTxt.getText())));
         rw.writeBalance(account.getBalance());
         updateBalanceDisplay();
+        amountTxt.clear();
     }
 
     @FXML
@@ -94,7 +96,10 @@ public class CustomerController implements Initializable {
     }
 
     private void updateBalanceDisplay() {
-        balanceLbl.setText(" $" + Double.toString(rw.getBalance()));
+        double balance = rw.getBalance();
+        double roundOff = Math.round(balance*100)/100;
+
+        balanceLbl.setText(" $" + Double.toString(roundOff));
     }
     
 }
